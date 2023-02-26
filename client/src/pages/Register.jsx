@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import Logo from '../images/logo.svg'
+import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { registerRoute } from '../utills/ApiRoutes'
 
 
 const Register = () => {
@@ -21,6 +23,19 @@ const Register = () => {
         pauseOnHover: true,
         draggable: true,
         theme: 'dark'
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        if (handleValidation()) {
+            console.log('validation', registerRoute)
+            const { password,  username, email } = values
+            const { data } = await axios.post(registerRoute,{
+                username, 
+                email,
+                password,
+            })
+        }
     }
 
     const handleValidation = () => {
@@ -44,14 +59,10 @@ const Register = () => {
             return false
         }
         alert("Sucessfully SignUp")
+        console.log(values)
         return true
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        handleValidation()
-        console.log(values)
-    }
 
     const handleChange = (e) => {
         setValues({
@@ -70,22 +81,22 @@ const Register = () => {
                     </div>
                     <input type="text"
                         placeholder='Username'
-                        name="username" 
+                        name="username"
                         onChange={(e) => handleChange(e)}
                     />
                     <input type="email"
                         placeholder='Email'
-                        name="email" 
+                        name="email"
                         onChange={(e) => handleChange(e)}
                     />
                     <input type="password"
                         placeholder='Password'
-                        name="password" 
+                        name="password"
                         onChange={(e) => handleChange(e)}
                     />
                     <input type="password"
                         placeholder='Confirm Password'
-                        name="confirmPassword" 
+                        name="confirmPassword"
                         onChange={(e) => handleChange(e)}
                     />
                     <button type='submit'>
@@ -94,7 +105,7 @@ const Register = () => {
                     <span>
                         Already have an Account?
                         <Link to="/login">
-                           {''} login
+                            {''} login
                         </Link>
                     </span>
                 </form>
