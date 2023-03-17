@@ -18,7 +18,7 @@ const Register = () => {
     })
 
     const toastOptions = {
-        position: 'bottom-right',
+        position: 'top-center',
         autoClose: 8000,
         pauseOnHover: true,
         draggable: true,
@@ -28,7 +28,7 @@ const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         if (handleValidation()) {
-            console.log('validation', registerRoute)
+            console.log('in validation', registerRoute)
             const { password,  username, email } = values
             const { data } = await axios.post(registerRoute,{
                 username, 
@@ -62,7 +62,6 @@ const Register = () => {
         console.log(values)
         return true
     }
-
 
     const handleChange = (e) => {
         setValues({
