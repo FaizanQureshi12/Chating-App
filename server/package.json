@@ -5,9 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "build": "echo \"No build specified\" && exit 1",
     "test": "echo \"No test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.mjs"
   },
   "author": "",
   "license": "ISC",
